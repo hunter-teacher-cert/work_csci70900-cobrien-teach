@@ -14,20 +14,22 @@ public class Mancala {
     for (int pit : pits){
       mySum += pit;
     }
-    returm mySum
+    return mySum;
   }
   public static Boolean isGameOver(int[] gameBoard){
     //checks if p1-p6 or p7-p12 is empty;
     Boolean gameOver = false;
+    // create slice for p1:p6
+    //create slice for p7:p12
     int[] pitsOne = Arrays.copyOfRange(gameBoard, 0,6);
     int[] pitsTwo = Arrays.copyOfRange(gameBoard, 7,13);
-    // create slice for p1:p6
-
-    //create slice for p7:p12
-
-
-
-    return gameOver
+    System.out.println("pitsOne: " + Arrays.toString(pitsOne));
+    int sumOne = sum(pitsOne);
+    int sumTwo = sum(pitsTwo);
+    if (sumOne + sumTwo == 0){
+      gameOver = true;
+    }
+    return gameOver;
   }
 
   public static int[] startBoard(int[] gameBoard) {
@@ -114,9 +116,10 @@ public class Mancala {
     gameBoard = new int[14];
     gameBoard = startBoard(gameBoard);
     //place 20 stones in p6
-    ;
-    gameBoard = playerOneTurn(gameBoard);
-    displayBoard(gameBoard);
+    Boolean gameOver = isGameOver(gameBoard);
+    System.out.println("Is game over? " + gameOver);
+    //gameBoard = playerOneTurn(gameBoard);
+    //displayBoard(gameBoard);
 
 
   }
