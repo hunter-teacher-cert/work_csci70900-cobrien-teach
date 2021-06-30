@@ -21,8 +21,11 @@ public class Nim {
   public static int aiRound(int bag){
     int pick;
     Random random = new Random();
-
-    pick = random.nextInt(3) +1;
+    if (bag < 3){
+      pick = random.nextInt(bag)+1;
+    } else {
+      pick = random.nextInt(3) +1;
+    }
     System.out.println("The computer is taking " + pick + " stones.");
     bag -= pick;
     return bag;
