@@ -23,7 +23,6 @@ public class Mancala {
     //create slice for p7:p12
     int[] pitsOne = Arrays.copyOfRange(gameBoard, 0,6);
     int[] pitsTwo = Arrays.copyOfRange(gameBoard, 7,13);
-    System.out.println("pitsOne: " + Arrays.toString(pitsOne));
     int sumOne = sum(pitsOne);
     int sumTwo = sum(pitsTwo);
     if (sumOne + sumTwo == 0){
@@ -53,8 +52,9 @@ public class Mancala {
     System.out.print("Player 1. Which pit (0, 1, 2, 3, 4, 5) do you choose?");
     int choice = in.nextInt();
     int numSeeds = gameBoard[choice];
+    int lastIndex = choice +numSeeds + 1;
     gameBoard[choice] = 0;
-    for (int i = choice + 1; i < choice + numSeeds + 1; i++) {
+    for (int i = choice + 1; i < lastIndex; i++) {
       int modI = i %14;
       if (modI == 13) {
         //skip opponents mancala
@@ -80,8 +80,9 @@ public class Mancala {
     System.out.print("Player 2. Which pit (7, 8, 9, 10, 11, 12) do you choose?");
     int choice = in.nextInt();
     int numSeeds = gameBoard[choice];
+    int lastIndex = choice +numSeeds + 1;
     gameBoard[choice] = 0;
-    for (int i = choice + 1; i < choice + numSeeds + 1; i++) {
+    for (int i = choice + 1; i < lastIndex; i++) {
       int modI = i %14;
       if (modI == 6) {
         //skip opponents mancala
@@ -104,8 +105,20 @@ public class Mancala {
     System.out.println(Arrays.toString(gameBoard));
 
   }
-
-  public static void main(String[] args) {
+  public static void checkWinner(int[] gameBoard){
+    // calculate points for player one
+    int pointsOne = gameBoard[6];
+    //calculate points for player two;
+    int pointsTwo = gameBoard[13];
+    if (pointsOne > pointsTwo){
+      System.out.println("Player one, you are the winner!");
+    } else if (pointsTwo > pointsOne){
+      System.out.println("Player two, you are the winner!");
+    } else {
+      System.out.println("You tied!");
+    }
+  }
+  public static void playGame(){
     /* create a gameBoard array,
     0-5: player one's pits, total of 6 (p1-p6)
     6: player 1's Mancala (M1)
@@ -114,12 +127,54 @@ public class Mancala {
     */
     int[] gameBoard;
     gameBoard = new int[14];
+
+    //Initialize gameboard with four seeds in each pit
     gameBoard = startBoard(gameBoard);
-    //place 20 stones in p6
-    Boolean gameOver = isGameOver(gameBoard);
-    System.out.println("Is game over? " + gameOver);
-    //gameBoard = playerOneTurn(gameBoard);
-    //displayBoard(gameBoard);
+
+    /*Ask players for their name
+    Scanner in = new Scanner(System.in);
+    System.out.println("Hey player one, what's your name? ");
+    String nameOne = in.nextLine();
+    System.out.println("Welcome " + nameOne + "!");
+
+    System.out.println("Hey player two, what's your name?");
+    String nameTwo = in.nextLine();
+    System.out.println("Welcome " + nameTwo +"!");
+    */
+    //set turn number, player one goes on even turns, player two on odd turns.
+    int turn = 0;
+    //play game until game is over alternating between player one and two.
+    while (true){
+      if(turn%2 ==0){
+        gameBoard = playerOneTurn(gameBoard);
+
+        } else {
+          gameBoard = playerTwoTurn(gameBoard);
+        }
+        //check if gameboard has reached final state. If so, end game.
+        if (isGameOver(gameBoard)){
+          break;
+        }
+        turn++;
+      }
+      checkWinner(gameBoard);
+  }
+
+  public static void main(String[] args) {
+    System.out.println("Welcome to CyberMancala (beta)!");
+    System.out.println("Right now this is a simplified version of the classic game Mancala.");
+    System.out.println("We hope to add more features in the future.");
+
+    while (true){
+      playGame();
+      Scanner in = new Scanner(System.in);
+      System.out.println("Do you want to play again (yes/no)");
+      String playAgain = in.nextLine();
+      if (playAgain == "no") {
+        System.out.println("Bye! Hope you play again sometime!");
+        break;
+      }
+    }
 
 
   }
