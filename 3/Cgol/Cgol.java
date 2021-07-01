@@ -27,7 +27,7 @@ public class Cgol
   public static void printBoard(char[][] board) {
     for (char[] rows : board){
       for (char cell : rows){
-        System.out.print(cell + ", ");
+        System.out.print(cell + " ");
 
       }
       System.out.print("\n");
@@ -36,9 +36,9 @@ public class Cgol
   }
 
 
-  //set cell (r,c) to val
+  //set a single cell  located at (rows, cols) to value val
   public static void setCell(char[][] board, int rows, int cols, char val){
-
+      board[rows][cols] = val;
   }
 
 
@@ -74,12 +74,17 @@ public class Cgol
     //testing if board exists.
   //  System.out.println("# of rows: " + board.length);
   //  System.out.println("# of columns: " + board[0].length);
-    printBoard(board);
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     //breathe life into some cells:
     setCell(board, 0, 0, 'X');
+    printBoard(board);
     setCell(board, 0, 1, 'X');
+    printBoard(board);
     setCell(board, 1, 0, 'X');
+    printBoard(board);
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
     // TASK:
     // Once your initial version is running,
     // try out different starting configurations of living cells...
