@@ -1,0 +1,14 @@
+1.
+No, I wug.
+You wugga wug.
+I wug.
+You wugga wug.
+
+
+2.
+main [ ]
+zoop [ ]
+baffle[ ]
+ping[ ]
+
+3.The program will enter an infinite loop:The two methods baffle() and ping() will be invoked in succession repeatedly.
