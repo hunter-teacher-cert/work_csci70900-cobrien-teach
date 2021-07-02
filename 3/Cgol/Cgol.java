@@ -39,6 +39,7 @@ public class Cgol
   //set a single cell  located at (rows, cols) to value val
   public static void setCell(char[][] board, int rows, int cols, char val){
       board[rows][cols] = val;
+
   }
 
 
@@ -81,22 +82,39 @@ public class Cgol
   public static char getNextGenCell(char[][] board,int rows, int cols) {
     //
     int numNeighbors = countNeighbours(board, rows, cols);
+    char newCell = ' ';
     //decide if cell is alive or dead;
-    if (board[rows][cols] == 'X') {
-
-    } else {
-
+    if (board[rows][cols] == 'X') {//cell is alive
+      //decide if cell less than 2 or more than 3 neighbors
+      if(numNeighbors > 3 || numNeighbors < 2){
+        newCell = ' ';//cell dies
+      } else {//otherwise cell lives
+        newCell = 'X';//cell lives
+      }
+    } else {//cell is dead
+      //decide if cell has exactly 3 countNeighbours
+      if (numNeighbors == 3){
+        newCell = 'X'; //cell is born
+      } else {
+        newCell = ' '; //cell stays dead
+      }
     }
-
-    char a = 65;
-    return a;
+    return newCell;
   }
 
 
   //generate new board representing next generation
   public static char[][] generateNextBoard(char[][] board) {
-    char[][] hello = new char[1][1];
-    return hello;
+    int numRow, numCol;
+    numRow = board.length;
+    numCol = board[0].length;
+    char[][] newBoard = createNewBoard(numRow,numCol);
+    for (int row =0; row < numRow; row++){
+      for (int cell =0; cell < numCol; cell++){
+        newBoard[row][cell] = getNextGenCell(board, row, cell);
+      }
+    }
+    return newBoard;
   }
 
 
@@ -110,20 +128,27 @@ public class Cgol
   //  System.out.println("# of columns: " + board[0].length);
 
     //breathe life into some cells:
-    setCell(board, 0, 0, 'X');
-    printBoard(board);
-    int sum = countNeighbours(board, 0 ,0);
-    System.out.println("# of neighbors: " + sum);
-    setCell(board, 0, 1, 'X');
-    printBoard(board);
-    sum = countNeighbours(board, 0 ,0);
-    System.out.println("# of neighbors: " + sum);
-    setCell(board, 1, 0, 'X');
-    printBoard(board);
-    sum = countNeighbours(board, 0 ,0);
-    System.out.println("# of neighbors: " + sum);
+    setCell(board, 10, 10, 'X');
+  //  printBoard(board);
+  //  int sum = countNeighbours(board, 0 ,0);
+  //  System.out.println("# of neighbors: " + sum);
+    setCell(board, 10, 11, 'X');
+//    printBoard(board);
+  //  sum = countNeighbours(board, 0 ,0);
+  //  System.out.println("# of neighbors: " + sum);
+    setCell(board, 10, 12, 'X');
+    setCell(board,9,12,'X');
+    setCell(board,8,11,'X');
+    //printBoard(board);
+    //sum = countNeighbours(board, 0 ,0);
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    /*
+    System.out.println("# of neighbors: " + sum);
+    System.out.println("Cell at 1,1 is initially a " + board[1][1]);
+    char newCell  = getNextGenCell(board, 1,1);
+    System.out.println("cell at (1,1) will become a " + newCell);
+    */
+
 
     // TASK:
     // Once your initial version is running,
@@ -136,6 +161,16 @@ public class Cgol
     System.out.println("Gen X+1:");
     printBoard(board);
     System.out.println("--------------------------\n\n");
+    int roundNum = 0;
+    for (int i=0; i<5; i++){
+      roundNum  = i+1;
+      System.out.println("Round #" +roundNum);
+      board = generateNextBoard(board);
+      printBoard(board);
+    }
+    //make glider
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   }//end main()
 
