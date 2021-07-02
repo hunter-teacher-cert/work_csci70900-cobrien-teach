@@ -44,7 +44,21 @@ public class Cgol
 
   //return number of living neigbours of board[r][c]
   public static int countNeighbours(char[][] board, int rows, int cols) {
-    return 0;
+    int row, col, sum;
+    sum = 0;
+    for (int i = -1; i < 2; i++){
+      row = i+rows;
+      for (int j = -1; j <2; j++){
+        col = j+cols;
+        if(row >= 0 && row <board.length && col >=0 && col < board[0].length && !(row == rows && col == cols)){
+      //    System.out.println(row +'x' + col + ' = ' + board[row][col]);
+          if(board[row][col] == 'X'){
+            sum++;
+          }
+        }
+      }
+    }
+    return sum;
   }
 
 
@@ -78,12 +92,18 @@ public class Cgol
     //breathe life into some cells:
     setCell(board, 0, 0, 'X');
     printBoard(board);
+
+
     setCell(board, 0, 1, 'X');
     printBoard(board);
+    int sum = countNeighbours(board, 0 ,0);
+    System.out.println("# of neighbors: " + sum);
     setCell(board, 1, 0, 'X');
     printBoard(board);
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     sum = countNeighbours(board, 0 ,0);
+    System.out.println("# of neighbors: " + sum);
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     // TASK:
     // Once your initial version is running,
