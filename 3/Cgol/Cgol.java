@@ -44,21 +44,32 @@ public class Cgol
 
   //return number of living neigbours of board[r][c]
   public static int countNeighbours(char[][] board, int rows, int cols) {
-    int row, col, sum;
-    sum = 0;
-    for (int i = -1; i < 2; i++){
-      row = i+rows;
-      for (int j = -1; j <2; j++){
-        col = j+cols;
-        if(row >= 0 && row <board.length && col >=0 && col < board[0].length && !(row == rows && col == cols)){
-      //    System.out.println(row +'x' + col + ' = ' + board[row][col]);
-          if(board[row][col] == 'X'){
-            sum++;
-          }
-        }
-      }
-    }
-    return sum;
+    //Chris: what if we treat this method as the following:
+    //search the area around a given r,c by summing the space around import junit.framework.TestCase;
+    //as a 3x3 2D array. (See image on slack)
+    //initialize sum as zero, this will store the number of living neighbor cells.
+    int sum = 0;
+    //search rows about and below the cell
+    for (int r = rows -1; r < rows + 2; r++){
+      //make sure rows aren't outside of array
+    //  System.out.println("r = " + r);
+      if (r <board.length && r >= 0){
+        //search 3 cells in row;
+        for (int c = cols -1; c < cols+2; c++){
+          //make sure cells our within array
+          //  System.out.println("c = " + c);
+            if (c < board[r].length && c >= 0 && !(r == rows && c ==cols)){
+              //if cell ==X add 1 to sum.
+              //System.out.println("This cell contains " + board[r][c]);
+              if (board[r][c] == 'X'){
+                sum +=1;
+              }
+
+            }
+        }  //end of inner loop
+      } //end of if statement for the outer loop
+    } //end of outer loop
+      return sum;
   }
 
 
@@ -68,6 +79,15 @@ public class Cgol
      (alive 'X', dead ' ')
   */
   public static char getNextGenCell(char[][] board,int rows, int cols) {
+    //
+    int numNeighbors = countNeighbours(board, rows, cols);
+    //decide if cell is alive or dead;
+    if (board[rows][cols] == 'X') {
+
+    } else {
+
+    }
+
     char a = 65;
     return a;
   }
@@ -92,15 +112,15 @@ public class Cgol
     //breathe life into some cells:
     setCell(board, 0, 0, 'X');
     printBoard(board);
-
-
+    int sum = countNeighbours(board, 0 ,0);
+    System.out.println("# of neighbors: " + sum);
     setCell(board, 0, 1, 'X');
     printBoard(board);
-    int sum = countNeighbours(board, 0 ,0);
+    sum = countNeighbours(board, 0 ,0);
     System.out.println("# of neighbors: " + sum);
     setCell(board, 1, 0, 'X');
     printBoard(board);
-     sum = countNeighbours(board, 0 ,0);
+    sum = countNeighbours(board, 0 ,0);
     System.out.println("# of neighbors: " + sum);
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,4 +139,4 @@ public class Cgol
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   }//end main()
 
-}//end class
+}//end classd
