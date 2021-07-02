@@ -13,8 +13,7 @@ import java.util.*;
    NOTA BENE:  All births and deaths occur simultaneously. Together, they constitute a single generation
 */
 
-public class Cgol
-{
+public class Cgol{
 
   //initialize empty board (all cells dead)
   public static char[][] createNewBoard(int rows, int cols) {
@@ -52,6 +51,7 @@ public class Cgol
     //search the area around a given r,c by summing the space around import junit.framework.TestCase;
     //as a 3x3 2D array. (See image on slack)
     //initialize sum as zero, this will store the number of living neighbor cells.
+    //(0,0)
     int sum = 0;
     //search rows about and below the cell
     for (int r = rows -1; r < rows + 2; r++){
@@ -119,95 +119,90 @@ public class Cgol
     }
     return newBoard;
   }
-  public static char[][] genRandCells(char[][] board, int numRand){
-    Random random = new Random();
-    int rowRand,colRand, numRow, numCol;
-    numRow = board.length;
-    numCol = board[0].length;
-    for (int i = 0; i<numRand; i++){
-      rowRand = random.nextInt(numRow);
-      colRand = random.nextInt(numCol);
-      while (board[rowRand][colRand] == 'X'){
-        rowRand = random.nextInt(numRow);
-        colRand = random.nextInt(numCol);
+
+
+
+    // pause for n milliseconds
+    public static void delay(int n) {
+      try {
+        Thread.sleep(n);
       }
-      setCell(board, rowRand, colRand, 'X');
-
-    }
-    return board;
-  }
-  public static void playGOL(){
-    Scanner in = new Scanner(System.in);
-
-    //How big an array do you want?
-    //how many rows? enter an integer
-    System.out.println("How many rows do you want in your array?");
-    int numRows = in.nextInt();
-
-    //how many columns?
-    System.out.println("How many columns do you want in your array?");
-    int numCols = in.nextInt();
-
-    //initialize array
-    char[][] board = createNewBoard(numRows, numCols);
-
-    //How many random cells do you want to activate
-    System.out.println("How many cells do you want to randomly activate?");
-    int numRand = in.nextInt();
-    //populate board with numRand cells in random locations
-    board = genRandCells(board, numRand);
-    System.out.println("Your initial board:");
-    printBoard(board);
-    System.out.println("How many generations do you want to watch?");
-    int numGen = in.nextInt();
-    //play gane for numGen generations
-    for (int gen = 1; gen < numGen +1; gen++){
-      System.out.println("Gen #"+gen);
-      board = generateNextBoard(board);
-      printBoard(board);
+      catch(InterruptedException e) {}
     }
 
 
+    // "repaint" by using an ANSI control character to
+    // repeatedly place the cursor at the origin (upper left)
+    public static void animate(int n) {
+      //clear screen, place cursor at origin (upper left)
+      System.out.print("[0;0H\n");
+      //System.out.println("Generation " + n);
+
+    //System.out.println("we are aaanimaniacs " + n);
+
+      // After you have predicted/observed/reconciled
+      // behavior of the preceding line,
+      // comment it out,
+      // uncomment the for loop below, and
+      // re-apply your process.
+/*
+
+      for( int i=n; i > 0; i-- ) {
 
 
-  }
+      }
+
+*/
+      delay(500);
+    }
+
   public static void main( String[] args )
   {
-    playGOL();
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     char[][] board;
     board = createNewBoard(25,25);
-    //testing if board exists.
-  //  System.out.println("# of rows: " + board.length);
-  //  System.out.println("# of columns: " + board[0].length);
-
-    //breathe life into some cells:
+    /*make box
+    XXX
+    X X
+    XXX
+    */
     setCell(board, 10, 10, 'X');
-  //  printBoard(board);
-  //  int sum = countNeighbours(board, 0 ,0);
-  //  System.out.println("# of neighbors: " + sum);
     setCell(board, 10, 11, 'X');
-//    printBoard(board);
-  //  sum = countNeighbours(board, 0 ,0);
-  //  System.out.println("# of neighbors: " + sum);
-    setCell(board, 10, 12, 'X');
-    setCell(board,9,12,'X');
-    setCell(board,8,11,'X');
+   setCell(board, 7, 8, 'X');
+
+    setCell(board,9,10,'X');
+    setCell(board,9,11,'X');
+    //setCell(board,8,12,'X');
+    setCell(board,5,11,'X');
+    setCell(board,5,10,'X');
+    setCell(board,6,11,'X');
+    setCell(board,6,10,'X');
+    /*
+    make cool pattern that eventually gets stable after ~170 generations
+    XXX
+    X X
+    X X
+
+    setCell(board, 11, 13, 'X');
+    setCell(board, 12, 11, 'X');
+    setCell(board, 12, 13, 'X');
+    setCell(board, 13, 11, 'X');
+    setCell(board, 13, 13, 'X');
+
     //printBoard(board);
-    //sum = countNeighbours(board, 0 ,0);
+    //sum = countNeighbours(board, 0 ,0)
 
-
-    System.out.println("# of neighbors: " + sum);
-    System.out.println("Cell at 1,1 is initially a " + board[1][1]);
-    char newCell  = getNextGenCell(board, 1,1);
-    System.out.println("cell at (1,1) will become a " + newCell);
-
+    //System.out.println("# of neighbors: " + sum);
+    //System.out.println("Cell at 1,1 is initially a " + board[1][1]);
+  //  char newCell  = getNextGenCell(board, 1,1);
+    //System.out.println("cell at (1,1) will become a " + newCell);
 
 
     // TASK:
     // Once your initial version is running,
     // try out different starting configurations of living cells...
     // (Feel free to comment out the above three lines.)
+    /*
     System.out.println("Gen X:");
     printBoard(board);
     System.out.println("--------------------------\n\n");
@@ -215,15 +210,19 @@ public class Cgol
     System.out.println("Gen X+1:");
     printBoard(board);
     System.out.println("--------------------------\n\n");
-    int roundNum = 0;
-    for (int i=0; i<5; i++){
-      roundNum  = i+1;
-      System.out.println("Round #" +roundNum);
+    */
+    System.out.println("Initial state:");
+    printBoard(board);
+    for (int gen=1; gen<100; gen++){
+      //System.out.println("Generation #" +gen);
       board = generateNextBoard(board);
+      animate(gen);
+      System.out.println("Generation " + gen+":");
       printBoard(board);
     }
     //make glider
 
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   }//end main()
