@@ -47,7 +47,7 @@ public class Mancala {
   public static int[] playerOneTurn(int[] gameBoard){
     //Player one can pick p1-p6. Then the n seeds in the p are sown in the next n places.
     Scanner in = new Scanner(System.in);
-    System.out.print("Current board: ");
+    System.out.println("Current board: ");
     displayBoard(gameBoard);
     System.out.print("Player 1. Which pit (0, 1, 2, 3, 4, 5) do you choose?");
     int choice = in.nextInt();
@@ -75,7 +75,7 @@ public class Mancala {
   public static int[] playerTwoTurn(int[] gameBoard){
     //Player two can pick p1-p6. Then the n seeds in the p are sown in the next n places.
     Scanner in = new Scanner(System.in);
-    System.out.print("Current board: ");
+    System.out.println("Current board: ");
     displayBoard(gameBoard);
     System.out.print("Player 2. Which pit (7, 8, 9, 10, 11, 12) do you choose?");
     int choice = in.nextInt();
@@ -102,8 +102,27 @@ public class Mancala {
 
   public static void displayBoard(int[] gameBoard){
     //Displays
-    System.out.println(Arrays.toString(gameBoard));
+    /* initialize topString, bottomString
+    Board will look like
+    M1 p1 p2 p3 p4 p5 p6
+       p7 p8 p9 p10 p11 p12 M2
+    Initialize top and bottom strings for board display.
+    */
+    String topString, bottomString;
+    topString = " ";
+    bottomString = " ";
+    //left concatenate p1-p6 and m1 to topString
+    for (int i=0; i<7;i++){
+      topString = gameBoard[i] + " " +topString;
+    }
+    //right concateneate p7-p12 and m2 to bottom String
+    for (int i = 7; i <14; i++){
+      bottomString = bottomString + " " + gameBoard[i];
+    }
 
+    //print top string and bottom string in two lines
+    System.out.println(topString);
+    System.out.println(bottomString);
   }
   public static void checkWinner(int[] gameBoard){
     // calculate points for player one
@@ -161,6 +180,8 @@ public class Mancala {
   }
 
   public static void main(String[] args) {
+
+
     System.out.println("Welcome to CyberMancala (beta)!");
     System.out.println("Right now this is a simplified version of the classic game Mancala.");
     System.out.println("We hope to add more features in the future.");
@@ -173,9 +194,10 @@ public class Mancala {
       if (playAgain == "no") {
         System.out.println("Bye! Hope you play again sometime!");
         break;
-      }
-    }
+      } //end if statement
+
+    } //end while loop
 
 
-  }
+  } // end main
 }

@@ -47,12 +47,13 @@ public class TwoDimArray
   }
   //return sum of all items in 2D integer array a
   // using helper fxn sumRow
-  public static int sumRow(int[] arr){
-    int sum = 0;
-    return sum;
-  }
+
   public static int sum2( int [][] m ) {
-    return 0;
+    int sum = 0;
+    for (int row = 0; row <m.length; row ++){
+      sum +=  sumRow2(row, m);
+    }
+    return sum;
   }
 
 
@@ -62,14 +63,24 @@ public class TwoDimArray
   //return sum of all items on row r of 2D integer array a
   // using a FOR loop
   public static int sumRow( int r, int[][] a ) {
-    return 0;
+    int[] row = a[r];
+    int sum = 0;
+    for (int cell =0; cell < row.length; cell++){
+      sum += row[cell];
+    }
+    return sum;
   }
 
 
   //return sum of all items on row r of 2D integer array a
   // using a FOREACH loop
   public static int sumRow2( int r, int[][] m ) {
-    return 0;
+    int[] row = m[r];
+    int sum = 0;
+    for (int cell : row){
+      sum += cell;
+    }
+    return sum;
   }
 
 
@@ -92,11 +103,12 @@ public class TwoDimArray
        System.out.println("sum m1 : " + sum1(m1));
        System.out.println("sum m2 : " + sum1(m2));
        System.out.println("sum m3 : " + sum1(m3));
-       	/*~~~v~~~~~slide~me~down~as~you~test~~~~~~~~~~~~~~~v~~~
+
        System.out.print("testing sum2...\n");
        System.out.println("sum m1 : " + sum2(m1));
        System.out.println("sum m2 : " + sum2(m2));
        System.out.println("sum m3 : " + sum2(m3));
+       /*~~~v~~~~~slide~me~down~as~you~test~~~~~~~~~~~~~~~v~~~
        ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
 
        */
