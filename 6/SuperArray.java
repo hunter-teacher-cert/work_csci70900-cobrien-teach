@@ -1,7 +1,7 @@
 /**
     Team
     Chris O'Brien
-    Mamadu Wally
+    Mamudu Wally
     Eric Liu tayou.liu@gmail.com
  **/
 
@@ -63,9 +63,11 @@ public class SuperArray
 
   public void add(int index, int value){
     //grow array
-    this.grow();
-    //make new array with +1 for new item
-    //int[] tempArray = new int[this.data.length+1]
+    if (this.numberElements >= this.data.length){
+      //check to see if array has enough room.
+      this.grow();
+    }
+
     //move all elements at location >=index upone.
     for(int i=this.numberElements ; i > index; i--) {
         this.data[i] = this.data[i-1];
@@ -82,9 +84,14 @@ public class SuperArray
   {
     //move elements to the right of index over on to the right
     for(int i=index; i < this.numberElements; i++) {
+        if (i == this.numberElements -1){
+          this.data[i] = this.data[0];
+        } else {
         this.data[i] = this.data[i+1];
+      }
     }
-    this.data[this.numberElements-1] = 0;
+  //  this.data[this.numberElements-1] = 0;
+    //decrement number of elements
     this.numberElements--;
 
 
@@ -131,7 +138,7 @@ public class SuperArray
   {
     // create a new array with extra space
     // Q: How did you decide how much to increase capacity by?
-    int[] tempData = new int[this.numberElements + 10];
+    int[] tempData = new int[this.numberElements + 1];
     // copy over all the elements from the old array to the new one
     for (int i = 0; i < this.numberElements; i++){
       tempData[i] = this.data[i];
