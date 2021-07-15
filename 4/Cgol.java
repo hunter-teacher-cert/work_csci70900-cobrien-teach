@@ -45,6 +45,7 @@ public class Cgol{
   }
 
 
+
   //return number of living neigbours of board[r][c]
   public static int countNeighbours(char[][] board, int rows, int cols) {
     //Chris: what if we treat this method as the following:

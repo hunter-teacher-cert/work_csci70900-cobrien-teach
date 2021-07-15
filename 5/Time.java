@@ -67,5 +67,24 @@ public class Time {
       return sum;
     }
 
+    public Time add(Time t){
+      Time sum = new Time();
+      sum.hour = this.hour + t.hour;
+      sum.minute = this.minute + t.minute;
+      //deal with situations where there are more than 60 minutes;
+
+      if (sum.minute > 60){
+        sum.hour += sum.minute/60;
+        sum.minute  = sum.minute%60;
+      }
+      sum.second = this.second + t.second;
+      //deal with >60 seconds
+      if (sum.second >60){
+        sum. minute += sum.second/60;
+        sum.second = sum.second%60;
+      }
+      return sum;
+    }
+
 
 }//end class

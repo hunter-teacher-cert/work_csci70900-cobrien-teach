@@ -13,7 +13,7 @@ public class Driver {
     //assign var the address of a newly-apportioned Time object
     //instantiate a newly-created Time object (aka "instance of class Time") with default value(s)
     t = new Time();
-  	Time.printTime(t);
+  	//Time.printTime(t);
 
   	//instantiate a newly-created Time object with specified value(s)
   	Time t1;

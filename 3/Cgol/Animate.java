@@ -29,8 +29,8 @@ public class Animate
   // repeatedly place the cursor at the origin (upper left)
   public static void animate(int n) {
     //clear screen, place cursor at origin (upper left)
-
     System.out.print("[0;0H\n");
+
     //System.out.println("we are aaanimaniacs " + n);
 
     // After you have predicted/observed/reconciled
@@ -39,26 +39,25 @@ public class Animate
     // uncomment the for loop below, and
     // re-apply your process.
 
-/*
 
     for( int i=n; i > 0; i-- ) {
 
       System.out.println("we are aaanimaniacs " + i);
     }
 
-*/
+
     delay(1000);
   }
 
 
   // run 20 frames of animation
   public static void main( String[] args ) {
-
+    animate(20);
+    /*
     for (int frame = 0; frame < 20; frame++) {
       animate(frame);
-      System.out.println("we are aniimmadfadsfa " + frame);
     }
-
+    */
   }//end main()
 
 }//end class
