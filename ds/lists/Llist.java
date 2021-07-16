@@ -130,19 +130,28 @@ public class Llist{
   // removes the node at index.
   // does nothing if index out of bounds
   public void remove(int index){
-    if   (index >= this.length()){
-      System.out.println("Index " + index + " is not in this list.");
+    int currentIndex = 0;
+    Node currentNode = front;
+    if (index > this.length()){
+      System.out.println("Index " + index + " is out of bounds " + this.length());
     } else {
-      Node  currentVar = front; // initialize currentVar as the front node
-      int counter = 0; // initialize counter
-      while (counter!= index){ // while counter is less than the requested index....
-        counter++; //.. increment counter ...
-        currentVar = currentVar.getNext(); //... and move to next node in the list
-      }
-      currentVar.setData(value); // set the value at counter index to requested value argument
-    }
-    }
-  }
+      while (currentNode != null){
+
+        if (currentIndex  == index -1){
+          //
+
+          currentNode.setNext(currentNode.getNext().getNext());
+          break;
+        } //end if
+        currentNode = currentNode.getNext();
+        currentIndex++;
+      } //end while
+  }//end else
+
+
+
+
+  }//end method
 
 
 }
