@@ -1,13 +1,30 @@
+/*
+Data Structures
+7/15-16/21
+Linked List methods assignment
+by
+Chris O'Brien
+Marina Moshchenko
+Liam Baum
+
+*/
+
 import java.io.*;
 import java.util.*;
 
 
 public class Llist{
   private Node front; // the front of the list
+  private int size; // instance variable for length of the list
 
+
+  // constructor to intialize instance variables
   public  Llist(){
-    front = null;
+    front = null; // initializw fron to null
+    size = 0; // initialize size to zero
   }
+
+  //constructer with
 
   // Add a new node containing data
   // at the front of the list
@@ -18,6 +35,8 @@ public class Llist{
     newNode.setNext(front);
     // point front to the new node
     front = newNode;
+    //update length
+    size++;
   }
 
   public String toString(){
@@ -51,8 +70,15 @@ public class Llist{
       numItems++;  // increments each time there is a new node
       currentNode = currentNode.getNext(); // move to the next node in the list
     }
-    return numItems; // return number of items in list;
+
+    return numItems; // return n umber of items in list;
   }
+
+  // method to get size instance variable value (the length of the list)
+  public int getSize(){
+    return this.size;
+  }
+
 
   // returns the item at location index;
   // returns null if there aren't enough
@@ -78,7 +104,7 @@ public class Llist{
   // only sets if the index is within range
   public void set(int index, String value){
     // check to see  if index is in range using length
-    if   (index >= this.length()){
+    if   (index >= this.size){
       System.out.println("Index " + index + " is not in this list.");
     } else{
       Node  currentVar = front; // initialize currentVar as the front node
@@ -112,13 +138,14 @@ public class Llist{
       numItems++;  // increments each time there is a new node
       currentNode = currentNode.getNext();
     } // end while
+    size++; // increment size instance variable
   } // end method
 
   // returns the index of the first item with
   // data value key. Returns -1 if not found
   public int search(String key){
     int index = 0;// initialize index counter
-    while (index != this.length()){ // iterates through list until index counter reaches the length of list
+    while (index != this.size){ // iterates through list until index counter reaches the length of list
       if (this.get(index) == key){ // if value at index of list is same as key argument...
         return index; //.. return the value of index counter and exit method
       }  //end if
@@ -132,8 +159,8 @@ public class Llist{
   public void remove(int index){
     int currentIndex = 0;
     Node currentNode = front;
-    if (index > this.length()){
-      System.out.println("Index " + index + " is out of bounds " + this.length());
+    if (index > this.size){
+      System.out.println("Index " + index + " is out of bounds " + this.size);
     } else {
       while (currentNode != null){
 
@@ -146,6 +173,7 @@ public class Llist{
         currentNode = currentNode.getNext();
         currentIndex++;
       } //end while
+      size--; // decrement size instance variable
   }//end else
 
 

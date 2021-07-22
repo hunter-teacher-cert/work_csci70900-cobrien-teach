@@ -21,6 +21,6 @@ Students realize they need another 'temporary' seat.
 Break students into n-sized groups.
 n students sit in the chairs.
 
-group activity: cycle through so that 0 sits in 1's seat, 1 in 2s, etc.
+group activity: shift: cycle through so that 0 sits in 1's seat, 1 in 2s, etc.
 group challenge: insert a student into list
 group challenge: Write an algorithm so that odd numbers end up switched with even numbers

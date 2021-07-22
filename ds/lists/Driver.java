@@ -1,3 +1,15 @@
+/*
+Data Structures
+7/15-16/21
+Linked List methods assignment
+by
+Chris O'Brien
+Marina Moshchenko
+Liam Baum
+
+*/
+
+
 import java.io.*;
 import java.util.*;
 
@@ -30,7 +42,7 @@ public class Driver{
     myList.addFront(datum);
     System.out.println(myList);
   }
-  /*
+
   test = myList.isEmpty();
   System.out.println("Is myList Empty? " + test);
   System.out.println("How many items? " + myList.length());
@@ -39,17 +51,25 @@ public class Driver{
   item = myList.get(4);
   System.out.println("4th item is " + item);
   System.out.println("10th item is " + myList.get(10));
-*/
+
   //test set() method, expect 'a->b->x->d->e->null'
   int index = 2;
   String value = "x";
   //myList.set(index, value);
   //test insert(), expect a->b->x ->c->d->e->null'
  myList.insert(index,value);
+
+
+
   System.out.println("list w/ x at 2: " + myList);
+  System.out.println("Length(): " + myList.length());
+  System.out.println("getSize(): " + myList.getSize());
   myList.remove(2);
   System.out.println("List after removing x:" + myList);
   myList.remove(10);
+  System.out.println("Length(): " + myList.length());
+  System.out.println("getSize(): " + myList.getSize());
+
   //test search
 //  int keySearch = myList.search("e");
 

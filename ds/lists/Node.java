@@ -5,20 +5,23 @@ public class Node {
 
     private String data;
     private Node next;
-
+    private Prev prev;
     public Node() {
     	data = "";
     	next = null;
+      prev = null;
     }//default constructor
 
     public Node(String value) {
     	data = value;
     	next = null;
+      prev = null
     }//constructor(value)
 
     public Node(String value, Node next) {
     	data = value;
     	this.next = next;
+
     }//constructor(value, next)
 
     public void setData(String value) {
