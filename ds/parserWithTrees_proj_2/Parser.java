@@ -1,6 +1,38 @@
 import java.io.*;
 import java.util.*;
 
+/*
+This implements a bottom up right-to-left parser. It contains two stack objects.
+One of these stacks  I (confusingly) named 'the stack', the other is the memory.
+The Parser works by:
+(i) taking a string and splitting it into an array of "words" (substrings
+seprated by " "
+(ii) A search is conducted through the lexicon for lexical items (see grammar)
+that match a word. If one is found, a copy of the lexical item is placed on the
+stack. because this occurs in order. The first word of the sentence is on the
+bottom of the stack, the last word on top.
+
+NOTE: These lexical items are instatited as trees with just one node. This makes
+it easier to write the merge operation (see below).
+
+(iii)The parser works as follows:
+  (a) Pop one tree from the stack, tree A. Then another tree B.
+  (b)Apply merge(A,B). If this is successful, push the output onto the stack.
+  Otherwise push A and B back onto stack in original order, then:
+    (i) see if the top of memory (tree C) can successfully merge with tree A.
+    If yes push ouput of that onto stack.
+    If no, pop A from stack, push onto memory.
+  (c) Keep doing this until you can't do any further moves. In that case there
+  are two possibilities (i) memory is empty, and stack contains just a tree
+  whose root is category S. In that case, you have a sentence of English or (ii)
+  the conditions in (i) do not obtain. In that case you do not have a sentence of
+  English.
+
+There's probably (hopefully) a mathematical proof that this can parser any sentence in the
+grammar, but I haven't worked it out. In any case, it's worked for every
+sentence and non-sentence I've tried.
+
+*/
 public class Parser{
   private Grammar grammar = null;
   private Stack<Tree> stack = null;
@@ -12,7 +44,7 @@ public class Parser{
     memory = new Stack<Tree>();
 
   } //end constructor
-
+  //turns nodes in lexicon into trees with just one node
   public  Tree makeTerm(Node node){
     String argsString = node.stringArgs();
     Node root = new Node(argsString);
@@ -25,6 +57,7 @@ public class Parser{
     return termTree;
 
   }
+  //search lexicon, puts trees associated with each lexical item into stack
   public void setStack(String string){
     String[] sentence = string.split(" ");
 
@@ -54,7 +87,7 @@ public class Parser{
       ///  break;
       }//end for
     }// end setStack
-
+    //implements merge.
     public Tree merge(Tree left, Tree right){
       Node leftRoot = left.getRoot();
       Node rightRoot = right.getRoot();
@@ -88,7 +121,7 @@ public class Parser{
     }
 
 
-
+      //implements parser.
       public Boolean parse(String sentence){
         stack.clear();
         memory.clear();

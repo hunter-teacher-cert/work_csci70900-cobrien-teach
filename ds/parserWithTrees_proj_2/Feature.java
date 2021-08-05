@@ -5,6 +5,9 @@ import java.util.*;
   contains:
   cat = {N, NP, VP, etc.}
   dir = {<,>, .}
+  A feature with, e.g. category NP and direction > wants means that the phrase wants to combine with
+  a phrase of category NP. A feature with NP and '.' is of category NP.
+
 */
 public class Feature{
   private String cat = null;
