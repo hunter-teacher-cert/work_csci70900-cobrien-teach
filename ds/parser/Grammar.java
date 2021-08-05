@@ -61,6 +61,17 @@ public class Grammar{
       this.addLex(newWord);
 
     } //end fancy noun looping
+
+
+    //instantiate adjectives
+    String[] adjectives = {"red", "blue", "bored", "difficult", "wiley"};
+    Feature Nright = new Feature("N", ">");
+    for (String adjective : adjectives){
+      LexItem newWord = new LexItem(adjective);
+      newWord.addArgs(Ndot);
+      newWord.addArgs(Nright);
+      this.addLex(newWord);
+    }//end adj loop
     //instantiate transitive verbs
     String[] verbs =  {"ate", "cooked", "read", "skipped", "surprised"};
     Feature Vdot = new Feature("S",".");

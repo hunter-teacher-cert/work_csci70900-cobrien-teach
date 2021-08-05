@@ -4,15 +4,15 @@ import java.util.*;
 public class Driver{
   public static void main(String[] args){
 
-    //instiate grammar
+    //instantiate grammar
     Grammar simpleEnglish = new Grammar();
     System.out.println("lexicon of simple English: ");
-
     //print lexicon
     System.out.println(simpleEnglish);
+
     Parser parser = new Parser(simpleEnglish);
 
-    String sentence  = "the veracity of the claim that the proof that the wiley thief escaped disappeared surprised the detective";
+    String sentence  = "the student  the class";
     System.out.println("Sentence: " + sentence);
     parser.parse(sentence);
 

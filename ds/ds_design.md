@@ -1,6 +1,7 @@
 # Data Structure design challenge
+//michel
 
-##Group 1
+## Group 1
 Brian M., Michele P, Peter T, Stephannia K, Chris O
 
 ## Methods
@@ -28,13 +29,46 @@ Time will vary depending on the length of the phoneBook.
 Answer these in the same or an additional file.
 What is the runtime for add, constant (if added at front)
 What is the runtime for find =  O(n);.  If list is sorted we could use binary search O(log n);
-What is the runtime for remove = O(n).If list is sorted we could use binary search O(log n);
-What is the runtime for printList O(n);
+What is the runtime for remove = order N
+What is the runtime for printList
 
 ## instructions
 Private Linked list variable of persons (call it phoneBook?);
 ## (Pseudo)Code
 
 ```Java
+//You are going to create a data structure to represent a phone book.
+//The phone book will store names and phone numbers of individuals.
+//Each individual will be stored using the following class specification:
+
+public class Person {
+  private String lastName;
+  private String firstName;
+  private String phoneNumber;
+
+  // other members not shown
+}
+//Design a data structure to store a phone book.
+//The entry class should be named PhoneBook, that is,
+//if you were writing a complete, coded solution your program would contain:
+public class PhoneBook{
+	// implementation not shown
+      private Person front; // point to the front of the list
+      private Person back;  // point to the back of the list
+      private LinkedList<Person> phoneBook;
+      private int size; //how many items there are in the list
+                        //TODO update size every time we add or delete
+      public  Llist(){
+  	    front = null;
+        size = 0;
+      }
+
+
+
+}
+
+String s = "ABC";
+int i = s.charAt(a); // i will now hold 65
+
 
 '''
